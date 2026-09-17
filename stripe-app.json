@@ -1,0 +1,27 @@
+{
+  "id": "com.reetayn.app",
+  "version": "0.0.1",
+  "name": "Reetayn",
+  "icon": "./assets/icon.png",
+  "permissions": [
+    { "permission": "customers_read" },
+    { "permission": "subscriptions_read" },
+    { "permission": "payment_methods_read" },
+    { "permission": "billing_portal_write" }
+  ],
+  "allowed_redirect_uris": [
+    "https://reetayn.com/api/auth/callback"
+  ],
+  "ui_extension": {
+    "views": [
+      {
+        "viewport": "stripe.dashboard.customer.detail",
+        "component": "CustomerRiskDrawer"
+      },
+      {
+        "viewport": "stripe.dashboard.home.overview",
+        "component": "OverviewDashboard"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "reetayn",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Zero-touch B2B subscription utility and Stripe App to eliminate involuntary churn and payment failures before renewals fail.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.21.1",
+    "@stripe/stripe-js": "^4.8.0",
+    "@stripe/ui-extension-sdk": "^9.3.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.453.0",
+    "next": "14.2.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "stripe": "^16.12.0",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.24",
+    "postcss": "^8.4.47",
+    "prisma": "^5.21.1",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}

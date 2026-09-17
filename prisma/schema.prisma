@@ -1,0 +1,81 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum RiskTier {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum RescueStatus {
+  PENDING
+  DISPATCHED
+  RESOLVED
+  EXPIRED
+}
+
+model Merchant {
+  id                   String            @id @default(cuid())
+  stripeAccountId      String            @unique
+  stripePublishableKey String?
+  accessTokenEncrypted String
+  webhookSecret        String?
+  isActive             Boolean           @default(true)
+  settingsAutoRescue   Boolean           @default(true)
+  rescueThresholdDays  Int               @default(14)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  trackedCustomers     TrackedCustomer[]
+  rescueEvents         RescueLog[]
+
+  @@index([stripeAccountId])
+}
+
+model TrackedCustomer {
+  id                  String       @id @default(cuid())
+  merchantId          String
+  merchant            Merchant     @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  stripeCustomerId    String
+  email               String?
+  name                String?
+  currency            String       @default("usd")
+  currentMrrCents     Int          @default(0)
+  cardLast4           String?
+  cardBrand           String?
+  cardExpMonth        Int?
+  cardExpYear         Int?
+  churnRiskTier       RiskTier     @default(LOW)
+  consecutiveFailures Int          @default(0)
+  lastDeclineCode     String?
+  lastDeclineAt       DateTime?
+  nextRenewalDate     DateTime?
+  lastRescuePortalUrl String?
+  updatedAt           DateTime     @updatedAt
+
+  @@unique([merchantId, stripeCustomerId])
+  @@index([merchantId, churnRiskTier])
+  @@index([nextRenewalDate])
+}
+
+model RescueLog {
+  id                   String       @id @default(cuid())
+  merchantId           String
+  merchant             Merchant     @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  stripeCustomerId     String
+  actionType           String       // "PORTAL_LINK_GENERATION", "DIRECT_RECOVERY_EMAIL", "MANUAL_DRAWER_TRIGGER"
+  status               RescueStatus @default(PENDING)
+  recoveredAmountCents Int          @default(0)
+  failureReason        String?
+  createdAt            DateTime     @default(now())
+  resolvedAt           DateTime?
+
+  @@index([merchantId, status])
+}
