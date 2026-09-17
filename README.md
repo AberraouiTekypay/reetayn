@@ -8,6 +8,24 @@
 
 > **Mission Brief:** Reetayn is a zero-touch, high-margin B2B subscription utility and native Stripe App designed to eliminate involuntary churn and payment failures **before renewals fail**.
 
+An **[EM300.co](https://em300.co)** Company.
+
+---
+
+## Documentation Index
+
+Comprehensive engineering guides are available in the [`docs/`](./docs) directory:
+
+| Document | Topic | Description |
+| :--- | :--- | :--- |
+| **[Architecture Blueprint](./docs/ARCHITECTURE.md)** | System Design | Full data flow diagrams, security boundaries, and async pipelines. |
+| **[Scoring Heuristic](./docs/SCORING_HEURISTIC.md)** | Mathematical Heuristic | UTC month-end proofs, leap-year calculations, and tier definitions. |
+| **[Webhook Engine & Security](./docs/WEBHOOK_ENGINE.md)** | Webhook & Ingestion | Raw body verification, secret rotation defense playbook, and SLA limits. |
+| **[Stripe App Extension](./docs/STRIPE_APP_EXTENSION.md)** | Stripe App SDK v9 | Manifest specification, drawer view, home overview, and clipboard APIs. |
+| **[REST API Reference](./docs/API_REFERENCE.md)** | API Documentation | Endpoints, query parameters, payloads, and response schemas. |
+| **[Deployment & Operations](./docs/DEPLOYMENT_GUIDE.md)** | Production Deployment | Docker, Vercel, PostgreSQL setup, and Stripe Marketplace checklist. |
+| **[Subscriber Rescue Journey](./docs/SUBSCRIBER_JOURNEY.md)** | Lifecycle State Machine | State machine and sequence flow for automated churn prevention. |
+
 ---
 
 ## Architecture & System Overview
